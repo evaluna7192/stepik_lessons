@@ -1,0 +1,5 @@
+input#firstname
+//input[@name='userlastname']
+input.email-class
+//input[@my_attr='fourth_custom_value']
+//input[contains(@class, "address-class")]
