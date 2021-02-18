@@ -13,6 +13,7 @@ confirm_password_locator = "[name = 'registration-password2']"
 register_button_locator = "[name = 'registration_submit']"
 account_button_locator = "i.icon-user"
 logout_button_locator = "#logout_link"
+registration_message_locator = "div.wicon"
 
 
 def test_register_new_user():
@@ -38,7 +39,8 @@ def test_register_new_user():
         register_button.click()
 
         # Assert
-        registration_message = WebDriverWait(browser, 12).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.wicon")))
+        registration_message = WebDriverWait(browser, 12).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, registration_message_locator)))
         assert registration_message_text in registration_message.text, \
             "Successful message about registration is not presented"
         assert browser.current_url == main_page_link, \
@@ -50,7 +52,6 @@ def test_register_new_user():
         assert logout_button, \
             "Logout button is not presented"
     finally:
-        time.sleep(5)
         browser.quit()
 
 
