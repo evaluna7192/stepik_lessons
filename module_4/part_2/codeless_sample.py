@@ -10,24 +10,24 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+
 class TestNewuserregistration():
-  def setup_method(self, method):
-    self.driver = webdriver.Chrome()
-    self.vars = {}
-  
-  def teardown_method(self, method):
-    self.driver.quit()
-  
-  def test_newuserregistration(self):
-    self.driver.get("http://selenium1py.pythonanywhere.com/en-gb/")
-    self.driver.set_window_size(1440, 860)
-    self.driver.find_element(By.ID, "login_link").click()
-    self.driver.find_element(By.ID, "id_registration-email").click()
-    self.driver.find_element(By.ID, "id_registration-email").send_keys("test123455@gmail.como")
-    self.driver.find_element(By.ID, "id_registration-password1").click()
-    self.driver.find_element(By.ID, "id_registration-password1").send_keys("Qwaszx@1q")
-    self.driver.find_element(By.ID, "id_registration-password2").click()
-    self.driver.find_element(By.ID, "id_registration-password2").send_keys("Qwaszx@1q")
-    self.driver.find_element(By.NAME, "registration_submit").click()
-    assert self.driver.find_element(By.CSS_SELECTOR, ".alertinner").text == "Thanks for registering!"
-  
+    def setup_method(self, method):
+        self.driver = webdriver.Chrome()
+        self.vars = {}
+
+    def teardown_method(self, method):
+        self.driver.quit()
+
+    def test_newuserregistration(self):
+        self.driver.get("http://selenium1py.pythonanywhere.com/en-gb/")
+        self.driver.set_window_size(1440, 860)
+        self.driver.find_element(By.ID, "login_link").click()
+        self.driver.find_element(By.ID, "id_registration-email").click()
+        self.driver.find_element(By.ID, "id_registration-email").send_keys("test123455@gmail.como")
+        self.driver.find_element(By.ID, "id_registration-password1").click()
+        self.driver.find_element(By.ID, "id_registration-password1").send_keys("Qwaszx@1q")
+        self.driver.find_element(By.ID, "id_registration-password2").click()
+        self.driver.find_element(By.ID, "id_registration-password2").send_keys("Qwaszx@1q")
+        self.driver.find_element(By.NAME, "registration_submit").click()
+        assert self.driver.find_element(By.CSS_SELECTOR, ".alertinner").text == "Thanks for registering!"
