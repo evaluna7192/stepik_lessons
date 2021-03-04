@@ -18,3 +18,8 @@ def browser(request):
     yield browser
     print("\nquit browser..")
     browser.quit()
+
+
+@pytest.fixture
+def site_language(request):
+    return request.config.getoption("language")
