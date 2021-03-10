@@ -1,6 +1,8 @@
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
 import pytest
+import time
 
 link1 = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
 link2 = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -54,3 +56,28 @@ class TestProductPage:
         page.go_to_basket_page()
         basket_page = BasketPage(browser, browser.current_url)
         basket_page.should_be_empty_basket()
+
+
+@pytest.mark.login_user
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        email = str(time.time()) + "@fakemail.org"
+        password = "Qwaszx@123"
+        page = LoginPage(browser, link1)
+        page.open()
+        page.go_to_login_page()
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        page = ProductPage(browser, link1)
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        page = ProductPage(browser, link1)
+        page.open()
+        page.add_product_to_basket()
+        page.should_be_correct_product_in_basket()
