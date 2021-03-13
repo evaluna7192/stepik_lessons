@@ -7,8 +7,6 @@ import time
 # Data
 link1 = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
 link2 = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-email = str(time.time()) + "@fakemail.org"
-password = "Qwaszx@123"
 
 
 class TestProductPage:
@@ -95,6 +93,10 @@ class TestUserAddToBasketFromProductPage():
 
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
+        # Data
+        email = str(time.time()) + "@wrongmail.org"
+        password = "Qwaszx@123"
+
         # Arrange
         page = LoginPage(browser, link1)
         page.open()
