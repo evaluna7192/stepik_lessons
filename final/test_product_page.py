@@ -87,8 +87,8 @@ class TestProductPage:
         # Assert
         basket_page.should_be_empty_basket()
 
-    @pytest.mark.my_test
-    def test_guest_can_go_to_main_page_from_product_page(self, browser):
+    @pytest.mark.personal_tests
+    def test_guest_can_go_to_main_page_from_product_page(self, browser, site_language):
         # Arrange
         page = ProductPage(browser, link1)
         page.open()
@@ -97,7 +97,7 @@ class TestProductPage:
         page.go_to_main_page()
 
         # Assert
-        page.should_be_main_page()
+        page.should_be_main_page(site_language)
 
 
 @pytest.mark.login_user

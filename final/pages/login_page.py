@@ -32,3 +32,4 @@ class LoginPage(BasePage):
         register_button = self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON)
         register_button.click()
 
+

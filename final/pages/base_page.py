@@ -5,7 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import math
 from .locators import BasePageLocators
-import pytest
 
 # Data
 main_page = "http://selenium1py.pythonanywhere.com"
@@ -68,6 +67,11 @@ class BasePage():
         # Assert
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
+    def should_not_be_login_link(self):
+        # Assert
+        assert self.is_not_element_present(*BasePageLocators.LOGIN_LINK), \
+            "Login link is presented, user is not authorized probably"
+
     def go_to_basket_page(self):
         # Act
         basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
@@ -88,16 +92,23 @@ class BasePage():
         main_page_link = self.browser.find_element(*BasePageLocators.MAIN_PAGE_LINK)
         main_page_link.click()
 
-    def should_be_main_page(self):
-        self.should_be_main_url()
+    def should_be_main_page(self, site_language):
+        self.should_be_main_url(site_language)
         self.should_be_main_page_header()
 
     def should_be_main_url(self, site_language):
-        main_page_link = f"{main_page}/{site_language}"
-        assert main_page_link == self.browser.current_url, "Main page url is npt correct"
+        # Arrange
+        language = site_language.lower()
+        main_page_link = f"{main_page}/{language}/"
+
+        # Assert
+        assert main_page_link == self.browser.current_url, "Main page url is not correct"
 
     def should_be_main_page_header(self):
+        # Arrange
         main_page_header = self.browser.find_element(*BasePageLocators.MAIN_PAGE_HEADER)
+
+        # Assert
         assert main_page_header_text == main_page_header.text, \
             "There is no main page header, there is not main page probably"
 

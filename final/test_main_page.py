@@ -46,7 +46,7 @@ class TestMainPage:
         basket_page.should_be_empty_basket()
 
 
-@pytest.mark.my_test
+@pytest.mark.personal_tests
 class TestAuthorizedUserFromMainPage():
 
     @pytest.fixture(scope="function", autouse=True)
@@ -87,3 +87,11 @@ class TestAuthorizedUserFromMainPage():
 
         # Assert
         page.should_be_account_page()
+
+    def test_user_can_not_see_login_link(self, browser):
+        # Arrange
+        page = MainPage(browser, link)
+        page.open()
+
+        # Assert
+        page.should_not_be_login_link()

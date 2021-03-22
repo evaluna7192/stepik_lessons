@@ -37,3 +37,6 @@ class BasePageLocators():
 class BasketPageLocators():
     EMPTY_BASKET_TEXT = (By.CSS_SELECTOR, "#content_inner p")
     PRODUCT_IN_BASKET = (By.CSS_SELECTOR, ".basket-items")
+
+class CataloguePageLocators():
+    CATALOGUE_PAGE_LOCATOR = (By.CSS_SELECTOR, ".current")
